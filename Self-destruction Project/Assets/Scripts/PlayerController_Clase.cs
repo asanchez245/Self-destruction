@@ -33,7 +33,7 @@ public class PlayerController_Clase : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //C�lculo de f�sicas del moviemiento del Player
+        //Calculo de fisicas del moviemiento del Player
         if (playerInput)
         {
             rb.linearVelocity = new Vector2(movement.x * _speed, movement.y * _speed);
