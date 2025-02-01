@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 using UnityEngine.UI;
@@ -12,6 +14,7 @@ public class GameControler_Clase : MonoBehaviour
     [SerializeField] Slider higadoSlider;
 
     [SerializeField] Slider respiracionSlider;
+    bool respirando;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,6 +31,16 @@ public class GameControler_Clase : MonoBehaviour
         pulmonesSlider.value -= Time.deltaTime;
         higadoSlider.value -= Time.deltaTime;
 
+        switch(respirando)
+        {
+            case true:
+                respiracionSlider.value += Time.deltaTime;
+                break;
+            case false:
+                respiracionSlider.value -= Time.deltaTime;
+                break;
+        }
+
     }
 
     public void CerebroBoost()
@@ -36,6 +49,7 @@ public class GameControler_Clase : MonoBehaviour
     }
     public void PulmonesBoost()
     {
+
         pulmonesSlider.value++;
 
     }
@@ -45,10 +59,20 @@ public class GameControler_Clase : MonoBehaviour
 
     }
 
-    public void RespiracionController()
-    {
-        respiracionSlider.enabled = true;
 
+    public IEnumerator RespiracionController()
+    {
+        respirando = true;
+        if (Input.GetMouseButtonUp(0))
+        {
+            respirando = false;
+        }
+        yield return new WaitForSeconds(2);
+        if (Input.GetMouseButtonDown(0))
+        {
+            respirando = true;
+        }
+        
     }
 
 
