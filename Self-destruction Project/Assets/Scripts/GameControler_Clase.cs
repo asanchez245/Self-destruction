@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -13,67 +14,58 @@ public class GameControler_Clase : MonoBehaviour
     [SerializeField] Slider pulmonesSlider;
     [SerializeField] Slider higadoSlider;
 
-    [SerializeField] Slider respiracionSlider;
-    bool respirando;
+    [SerializeField] GameObject playerController;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    public bool respirando;
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
 
         cerebroSlider.value -= Time.deltaTime;
-        pulmonesSlider.value -= Time.deltaTime;
-        higadoSlider.value -= Time.deltaTime;
+        higadoSlider.value -= Time.deltaTime * 5;
 
         switch(respirando)
         {
             case true:
-                respiracionSlider.value += Time.deltaTime;
+                pulmonesSlider.value += Time.deltaTime;
                 break;
             case false:
-                respiracionSlider.value -= Time.deltaTime;
+                pulmonesSlider.value -= Time.deltaTime;
                 break;
         }
 
+        //Player Lose
+        if(cerebroSlider.value <=0 || pulmonesSlider.value <= 0 ||  higadoSlider.value <= 0)
+        {
+            playerController.GetComponent<PlayerController_Clase>().PlayerDeath();
+        }
     }
 
     public void CerebroBoost()
     {
         cerebroSlider.value++;
     }
-    public void PulmonesBoost()
-    {
 
-        pulmonesSlider.value++;
-
-    }
     public void HigadoBoost()
     {
         higadoSlider.value++;
 
     }
 
-
-    public IEnumerator RespiracionController()
+    
+    public void RespiracionBoolController()
     {
-        respirando = true;
-        if (Input.GetMouseButtonUp(0))
+        switch (respirando)
         {
-            respirando = false;
+            case true:
+                respirando = false;
+                break;
+            case false:
+                respirando = true;
+                break;
         }
-        yield return new WaitForSeconds(2);
-        if (Input.GetMouseButtonDown(0))
-        {
-            respirando = true;
-        }
-        
     }
 
-
+    
 }

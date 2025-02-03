@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
 public class PlayerController_Clase : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController_Clase : MonoBehaviour
     public bool playerInput;
 
     [SerializeField] float _speed;
+    [SerializeField] GameObject _deathCamera;
 
     #endregion
     void Start()
@@ -30,6 +32,7 @@ public class PlayerController_Clase : MonoBehaviour
         float movementY = Input.GetAxisRaw("Vertical");
 
         movement = new Vector2(movementX, movementY).normalized;
+
     }
     private void FixedUpdate()
     {
@@ -38,6 +41,15 @@ public class PlayerController_Clase : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(movement.x * _speed, movement.y * _speed);
         }
+    }
+
+    public void PlayerDeath()
+    {
+        playerInput = false;
+        rb.linearVelocity = Vector3.zero;
+
+        Debug.Log("Muelto");
+        _deathCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
     }
 }
 
