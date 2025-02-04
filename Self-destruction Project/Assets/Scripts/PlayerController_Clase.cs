@@ -24,6 +24,7 @@ public class PlayerController_Clase : MonoBehaviour
 
     void Update()
     {
+        rb.sleepMode = RigidbodySleepMode2D.NeverSleep; //Hace que el rigidbody este siempre activo 
 
         //Movimiento del Player
         playerPos = transform.position;
