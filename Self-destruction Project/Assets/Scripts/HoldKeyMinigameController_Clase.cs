@@ -40,18 +40,18 @@ public class MinigamesController_Clase : MonoBehaviour
                     _sliderCama.value += Time.deltaTime;
                 }
             }
-            if(_sliderCama.value >= 40)
+            if (_sliderCama.value >= 40)
             {
                 Debug.Log("cama hecha");
             }
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (playerController.playerInput)
         {
-            if (collision.transform.tag == "Player" && Input.GetKeyDown(KeyCode.E))
+            if (collision.transform.tag == "Player")
             {
                 switch (transform.tag)
                 {
@@ -64,5 +64,20 @@ public class MinigamesController_Clase : MonoBehaviour
             }
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            switch (transform.tag)
+            {
+                case ("HacerCama"):
+                    _sliderCamaObject.SetActive(false);
+                    _startCama = false;
 
+                    break;
+
+            }
+
+        }
+    }
 }
