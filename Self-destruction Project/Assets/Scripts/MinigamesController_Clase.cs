@@ -9,6 +9,9 @@ public class HoldKeyMinigameController_Clase : MonoBehaviour
     PlayerController_Clase playerController;
     [SerializeField] GameObject _player;
 
+    [SerializeField] GameObject _gameController;
+
+
     [SerializeField] GameObject _sliderCamaObject;
     [SerializeField] Slider _sliderCama;
     [SerializeField] bool _startCama;

@@ -13,7 +13,6 @@ public class MinigamesController_Clase : MonoBehaviour
     [SerializeField] Slider _sliderCama;
     [SerializeField] bool _startCama;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -21,7 +20,6 @@ public class MinigamesController_Clase : MonoBehaviour
         _sliderCamaObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_startCama && playerController.playerInput)
@@ -53,7 +51,6 @@ public class MinigamesController_Clase : MonoBehaviour
     {
         if (playerController.playerInput)
         {
-            //Cuando el player esta en el trigger del objeto, este puede ser agarrado
             if (collision.transform.tag == "Player" && Input.GetKeyDown(KeyCode.E))
             {
                 switch (transform.tag)
