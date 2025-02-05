@@ -6,21 +6,21 @@ using UnityEngine.UI;
 
 public class MinigamesController_Clase : MonoBehaviour
 {
+    #region VARIABLES
     PlayerController_Clase playerController;
-    [SerializeField] GameObject _player;
-
     GameControler_Clase gameController;
-    [SerializeField] GameObject _gameController;
 
+    [SerializeField] GameObject _player;
+    [SerializeField] GameObject _gameController;
     [SerializeField] GameObject _sliderCamaObject;
     [SerializeField] Slider _sliderCama;
     [SerializeField] bool _startCama;
-
-    [SerializeField] GameObject[] letras;
-    Vector3 letrasScale = new Vector3(.75f, .75f, .75f);
-
     [SerializeField] GameObject _camaSinHacer;
     [SerializeField] GameObject _camaHecha;
+    [SerializeField] GameObject[] letras;
+
+    Vector3 letrasScale = new Vector3(.75f, .75f, .75f);
+    #endregion
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -114,7 +114,6 @@ public class MinigamesController_Clase : MonoBehaviour
             }
             if (_sliderCama.value >= 40)
             {
-                Debug.Log("cama hecha");
                 letras[2].gameObject.SetActive(false);
                 letras[3].gameObject.SetActive(false);
                 letras[4].gameObject.SetActive(false);
