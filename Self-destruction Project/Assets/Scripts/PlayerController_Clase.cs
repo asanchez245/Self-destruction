@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using System;
 
 public class PlayerController_Clase : MonoBehaviour
 {
@@ -13,12 +14,16 @@ public class PlayerController_Clase : MonoBehaviour
 
     [SerializeField] float _speed;
     [SerializeField] GameObject _deathCamera;
+    [SerializeField] GameObject _gameController;
+    GameControler_Clase gameControler_Clase;
+
 
     #endregion
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         playerInput = true;
+        gameControler_Clase = _gameController.GetComponent<GameControler_Clase>();
     }
 
 
@@ -34,7 +39,10 @@ public class PlayerController_Clase : MonoBehaviour
 
         movement = new Vector2(movementX, movementY).normalized;
 
+
+        InventoryCheck();
     }
+
     private void FixedUpdate()
     {
         //Calculo de fisicas del moviemiento del Player
@@ -51,6 +59,19 @@ public class PlayerController_Clase : MonoBehaviour
 
         Debug.Log("Muelto");
         _deathCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+    }
+    private void InventoryCheck()
+    {
+        if(transform.childCount > 1)
+        {
+            gameControler_Clase.multiplicadorCerebro = 1 + (transform.childCount/2);
+        }
+        if (transform.childCount == 1)
+        {
+            gameControler_Clase.multiplicadorCerebro = 1f;
+
+        }
+
     }
 }
 

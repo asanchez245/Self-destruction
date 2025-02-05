@@ -9,15 +9,25 @@ public class MinigamesController_Clase : MonoBehaviour
     PlayerController_Clase playerController;
     [SerializeField] GameObject _player;
 
+    GameControler_Clase gameController;
+    [SerializeField] GameObject _gameController;
+
     [SerializeField] GameObject _sliderCamaObject;
     [SerializeField] Slider _sliderCama;
     [SerializeField] bool _startCama;
 
+    [SerializeField] GameObject[] letras;
+    Vector3 letrasScale = new Vector3(.75f, .75f, .75f);
+
+    [SerializeField] GameObject _camaSinHacer;
+    [SerializeField] GameObject _camaHecha;
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         playerController = _player.GetComponent<PlayerController_Clase>();
+        gameController = _gameController.GetComponent<GameControler_Clase>();
         _sliderCamaObject.SetActive(false);
+        _camaHecha.SetActive(false);
     }
 
     void Update()
@@ -26,23 +36,93 @@ public class MinigamesController_Clase : MonoBehaviour
         {
             if (_sliderCama.value <= 20)
             {
-                //show keys p,Z
+                letras[0].gameObject.SetActive(true);
+                letras[1].gameObject.SetActive(true);
                 if (Input.GetKey(KeyCode.P) && Input.GetKey(KeyCode.Z))
                 {
                     _sliderCama.value += Time.deltaTime;
+                    gameController.multiplicadorHigado = 2;
                 }
+                else
+                {
+                    gameController.multiplicadorHigado = 1;
+                }
+                #region Visual input key pressed
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    letras[0].transform.localScale = Vector3.one;
+                }
+                if (Input.GetKeyUp(KeyCode.P))
+                {
+                    letras[0].transform.localScale = letrasScale;
+                }
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    letras[1].transform.localScale = Vector3.one;
+                }
+                if (Input.GetKeyUp(KeyCode.Z))
+                {
+                    letras[1].transform.localScale = letrasScale;
+                }
+                #endregion
             }
             else
             {
-                //show keys Q,C,L
+                letras[0].gameObject.SetActive(false);
+                letras[1].gameObject.SetActive(false);
+
+                letras[2].gameObject.SetActive(true);
+                letras[3].gameObject.SetActive(true);
+                letras[4].gameObject.SetActive(true);
                 if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.L))
                 {
                     _sliderCama.value += Time.deltaTime;
+                    gameController.multiplicadorHigado = 2;
                 }
+                else
+                {
+                    gameController.multiplicadorHigado = 1;
+                }
+                #region Visual input key pressed
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    letras[2].transform.localScale = Vector3.one;
+                }
+                if (Input.GetKeyUp(KeyCode.Q))
+                {
+                    letras[2].transform.localScale = letrasScale;
+                }
+
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    letras[3].transform.localScale = Vector3.one;
+                }
+                if (Input.GetKeyUp(KeyCode.C))
+                {
+                    letras[3].transform.localScale = letrasScale;
+                }
+
+                if (Input.GetKeyDown(KeyCode.L))
+                {
+                    letras[4].transform.localScale = Vector3.one;
+                }
+                if (Input.GetKeyUp(KeyCode.L))
+                {
+                    letras[4].transform.localScale = letrasScale;
+                }
+                #endregion
             }
             if (_sliderCama.value >= 40)
             {
                 Debug.Log("cama hecha");
+                letras[2].gameObject.SetActive(false);
+                letras[3].gameObject.SetActive(false);
+                letras[4].gameObject.SetActive(false);
+
+                _camaSinHacer.gameObject.SetActive(false);
+                _sliderCamaObject.SetActive(false);
+                _camaHecha.gameObject.SetActive(true);
+
             }
         }
     }
@@ -73,6 +153,8 @@ public class MinigamesController_Clase : MonoBehaviour
                 case ("HacerCama"):
                     _sliderCamaObject.SetActive(false);
                     _startCama = false;
+                    letras[0].gameObject.SetActive(false);
+                    letras[1].gameObject.SetActive(false);
 
                     break;
 

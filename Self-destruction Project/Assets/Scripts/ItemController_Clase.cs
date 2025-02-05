@@ -48,7 +48,7 @@ public class ItemController_Clase : MonoBehaviour
                         {
                             _crono = .2f;
                             transform.parent = collision.transform;
-                            transform.position = collision.transform.position;
+                            transform.position = collision.transform.position + new Vector3(1, -.5f, 0);
                             _cogerItem = true;
                             _dejarItem = false;
                             //_sfxController.GetComponent<AudioController_Clase>().SonidoItems();
@@ -75,7 +75,7 @@ public class ItemController_Clase : MonoBehaviour
                             _cogerItem = false;
                             _dejarItem = true;
                             //_sfxController.GetComponent<AudioController_Clase>().SonidoItems();
-                            _depositado = true;
+                            //_depositado = true;
                             //playerController.inventoryFull = false;
                     
                         }

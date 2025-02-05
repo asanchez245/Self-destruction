@@ -16,14 +16,27 @@ public class GameControler_Clase : MonoBehaviour
 
     [SerializeField] GameObject playerController;
 
+    [SerializeField] GameObject trashCan;
+
+    public float multiplicadorCerebro;
+    public float multiplicadorHigado;
+
+
 
     public bool respirando;
+
+
+    private void Start()
+    {
+        multiplicadorCerebro = 1;
+        multiplicadorHigado = 1;      
+    }
 
     void Update()
     {
 
-        cerebroSlider.value -= Time.deltaTime;
-        higadoSlider.value -= Time.deltaTime * 5;
+        cerebroSlider.value -= Time.deltaTime * multiplicadorCerebro;
+        higadoSlider.value -= Time.deltaTime * 5 * multiplicadorHigado;
 
         switch(respirando)
         {
@@ -39,6 +52,12 @@ public class GameControler_Clase : MonoBehaviour
         if(cerebroSlider.value <=0 || pulmonesSlider.value <= 0 ||  higadoSlider.value <= 0)
         {
             playerController.GetComponent<PlayerController_Clase>().PlayerDeath();
+        }
+
+        //Comprobador papelera llena
+        if(trashCan.transform.childCount == 3)
+        {
+            Debug.Log("papelera llena");
         }
     }
 
