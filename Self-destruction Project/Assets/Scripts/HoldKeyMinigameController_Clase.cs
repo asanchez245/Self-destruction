@@ -32,6 +32,47 @@ public class MinigamesController_Clase : MonoBehaviour
 
     void Update()
     {
+        CamaMinigame();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (playerController.playerInput)
+        {
+            if (collision.transform.tag == "Player")
+            {
+                switch (transform.tag)
+                {
+                    case ("HacerCama"):
+                        _sliderCamaObject.SetActive(true);
+                        _startCama = true;
+
+                        break;
+                }
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            switch (transform.tag)
+            {
+                case ("HacerCama"):
+                    _sliderCamaObject.SetActive(false);
+                    _startCama = false;
+                    letras[0].gameObject.SetActive(false);
+                    letras[1].gameObject.SetActive(false);
+
+                    break;
+
+            }
+
+        }
+    }
+
+    public void CamaMinigame()
+    {
         if (_startCama && playerController.playerInput)
         {
             if (_sliderCama.value <= 20)
@@ -123,42 +164,6 @@ public class MinigamesController_Clase : MonoBehaviour
                 _camaHecha.gameObject.SetActive(true);
 
             }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (playerController.playerInput)
-        {
-            if (collision.transform.tag == "Player")
-            {
-                switch (transform.tag)
-                {
-                    case ("HacerCama"):
-                        _sliderCamaObject.SetActive(true);
-                        _startCama = true;
-
-                        break;
-                }
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.transform.tag == "Player")
-        {
-            switch (transform.tag)
-            {
-                case ("HacerCama"):
-                    _sliderCamaObject.SetActive(false);
-                    _startCama = false;
-                    letras[0].gameObject.SetActive(false);
-                    letras[1].gameObject.SetActive(false);
-
-                    break;
-
-            }
-
         }
     }
 }

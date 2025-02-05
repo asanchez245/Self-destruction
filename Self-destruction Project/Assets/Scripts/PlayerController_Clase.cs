@@ -73,5 +73,12 @@ public class PlayerController_Clase : MonoBehaviour
         }
 
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Espejo") && Input.GetKey(KeyCode.E))
+        {
+            //termina el juego
+        }
+    }
 }
 

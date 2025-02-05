@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,12 +17,17 @@ public class GameControler_Clase : MonoBehaviour
 
     [SerializeField] GameObject playerController;
 
-    [SerializeField] GameObject trashCan;
+    [SerializeField] GameObject papelera;
+    [SerializeField] GameObject mantaEspejo;
 
     public float multiplicadorCerebro;
     public float multiplicadorHigado;
 
     public bool respirando;
+
+    public bool[] doneMinigames;
+
+
 
     #endregion
     private void Start()
@@ -53,9 +59,19 @@ public class GameControler_Clase : MonoBehaviour
         }
 
         //Comprobador papelera llena
-        if(trashCan.transform.childCount == 3)
+        if(papelera.transform.childCount == 3)
         {
             Debug.Log("papelera llena");
+        }
+
+        CheckDoneMinigames();
+    }
+
+    private void CheckDoneMinigames()
+    {
+        if (doneMinigames[0] && doneMinigames[1] && doneMinigames[2] && doneMinigames[3] && doneMinigames[4])
+        {
+            mantaEspejo.SetActive(false);
         }
     }
 
