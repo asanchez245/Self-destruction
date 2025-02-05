@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class GameControler_Clase : MonoBehaviour
 {
-
+    #region VARIABLES
     [SerializeField] Slider cerebroSlider;
     [SerializeField] Slider pulmonesSlider;
     [SerializeField] Slider higadoSlider;
@@ -21,11 +21,9 @@ public class GameControler_Clase : MonoBehaviour
     public float multiplicadorCerebro;
     public float multiplicadorHigado;
 
-
-
     public bool respirando;
 
-
+    #endregion
     private void Start()
     {
         multiplicadorCerebro = 1;

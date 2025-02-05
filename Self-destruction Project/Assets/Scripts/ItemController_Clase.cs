@@ -5,30 +5,30 @@ using UnityEngine;
 
 public class ItemController_Clase : MonoBehaviour
 {
+    #region VARIABLES
+    PlayerController_Clase playerController;
+
+    [SerializeField] GameObject _player;
+    [SerializeField] float _crono;
     [SerializeField] bool _depositado;
+
     public bool _cogerItem;
     public bool _dejarItem;
 
-
-    [SerializeField] float _crono;
-    [SerializeField] GameObject _player;
-    PlayerController_Clase playerController;
-
     //public GameObject _sfxController;
 
+    #endregion
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        //_sfxController = GameObject.FindGameObjectWithTag("AudioController");
-
         playerController = _player.GetComponent<PlayerController_Clase>();
         _depositado = true;
+
+        //_sfxController = GameObject.FindGameObjectWithTag("AudioController");
     }
     private void Update()
     {
-
-        _crono -= Time.deltaTime;
-        
+        _crono -= Time.deltaTime;       
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -82,9 +82,6 @@ public class ItemController_Clase : MonoBehaviour
                     }
                 }           
             }
-        }
-
-        
+        }       
     }
-
 }
