@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Deposito
   - HacerCama
+  - Espejo
   layers:
   - Default
   - TransparentFX

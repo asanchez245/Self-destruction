@@ -524,6 +524,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1329105571640230725, guid: 77f49f0826ac5b944a245b3542d00233, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1485781114217035000, guid: 77f49f0826ac5b944a245b3542d00233, type: 3}
       propertyPath: m_Name
       value: PickableObject (2)
@@ -817,7 +821,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -926,14 +930,14 @@ MonoBehaviour:
   _sliderCamaObject: {fileID: 468318671}
   _sliderCama: {fileID: 468318673}
   _startCama: 0
+  _camaSinHacer: {fileID: 956325907}
+  _camaHecha: {fileID: 534042863}
   letras:
   - {fileID: 125629201}
   - {fileID: 1662864877}
   - {fileID: 112415924}
   - {fileID: 2104039463}
   - {fileID: 1438710744}
-  _camaSinHacer: {fileID: 956325907}
-  _camaHecha: {fileID: 534042863}
 --- !u!1 &287443768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,21 +1874,22 @@ EdgeCollider2D:
   - {x: 8.184121, y: 5.570601}
   - {x: 8.957936, y: 5.551795}
   - {x: 8.992615, y: 3.7366548}
-  - {x: 8.178823, y: 3.2827525}
-  - {x: 7.974802, y: 3.236339}
-  - {x: 7.6566358, y: 3.3041337}
-  - {x: 6.864117, y: 3.4890385}
-  - {x: 6.7101784, y: 3.5103648}
-  - {x: 6.6016936, y: 3.4969513}
-  - {x: 6.5518227, y: 3.442325}
-  - {x: 6.5318, y: 3.257367}
-  - {x: 6.7962976, y: 2.6511536}
-  - {x: 6.8257036, y: 2.0771668}
-  - {x: 6.843431, y: 1.5977044}
-  - {x: 6.9386816, y: 1.109694}
-  - {x: 7.2072506, y: 0.89693224}
-  - {x: 7.47718, y: 0.7668226}
-  - {x: 7.5032644, y: 0.09853506}
+  - {x: 8.958779, y: 3.3802466}
+  - {x: 8.876625, y: 3.2607129}
+  - {x: 8.485338, y: 3.0725846}
+  - {x: 7.1444135, y: 2.7578309}
+  - {x: 7.100156, y: 2.7182229}
+  - {x: 6.88199, y: 2.6195023}
+  - {x: 6.722438, y: 2.5648758}
+  - {x: 6.7877226, y: 1.2831057}
+  - {x: 6.942539, y: 1.3227928}
+  - {x: 7.252241, y: 1.4312665}
+  - {x: 7.830561, y: 1.6464515}
+  - {x: 8.705769, y: 1.9383961}
+  - {x: 8.803721, y: 1.920623}
+  - {x: 8.849192, y: 1.1006858}
+  - {x: 8.866475, y: 0.035614848}
+  - {x: 7.8079348, y: -0.09645355}
   - {x: 7.389894, y: -0.06868881}
   - {x: 7.051568, y: -0.21740818}
   - {x: 6.713054, y: -0.28620988}
@@ -2864,10 +2869,13 @@ MonoBehaviour:
   pulmonesSlider: {fileID: 1835230966}
   higadoSlider: {fileID: 440899422}
   playerController: {fileID: 118422994}
-  trashCan: {fileID: 1932441901}
+  papelera: {fileID: 1932441901}
+  mantaEspejo: {fileID: 1623572162}
+  espejo: {fileID: 1296859553}
   multiplicadorCerebro: 0
   multiplicadorHigado: 0
   respirando: 0
+  doneMinigames: 0000
 --- !u!1 &1296859553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2878,9 +2886,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1296859555}
   - component: {fileID: 1296859554}
+  - component: {fileID: 1296859556}
   m_Layer: 0
-  m_Name: SB_espejp
-  m_TagString: Untagged
+  m_Name: SB_espejo
+  m_TagString: Espejo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2955,6 +2964,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1296859556
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296859553}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.61, y: 0.51}
+    newSize: {x: 3.86, y: 2.53}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.7, y: 0.58}
+  m_EdgeRadius: 0
 --- !u!1 &1300645143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3474,6 +3529,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1329105571640230725, guid: 77f49f0826ac5b944a245b3542d00233, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1485781114217035000, guid: 77f49f0826ac5b944a245b3542d00233, type: 3}
       propertyPath: m_Name
       value: PickableObject
@@ -3493,6 +3552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623572164}
   - component: {fileID: 1623572163}
+  - component: {fileID: 1623572165}
   m_Layer: 0
   m_Name: SB_mantaEspejo
   m_TagString: Untagged
@@ -3570,6 +3630,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1623572165
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623572162}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.1945718, y: -0.22379391}
+  - {x: 0.0031082844, y: -0.2660728}
+  - {x: -0.06944561, y: -0.284315}
+  - {x: -0.12848595, y: -0.2759513}
+  - {x: -0.15501319, y: -0.25599232}
+  - {x: -0.15394697, y: -0.20661971}
+  - {x: -0.11203871, y: -0.13509126}
+  - {x: -0.121656165, y: -0.04461748}
+  - {x: -0.10555666, y: 0.072556086}
+  - {x: -0.114372686, y: 0.10882187}
+  - {x: -0.18031935, y: 0.12800226}
+  - {x: -0.27250266, y: 0.1963067}
+  - {x: -0.2645443, y: 0.23063879}
+  - {x: -0.23135133, y: 0.25849196}
+  - {x: -0.17220835, y: 0.26400244}
+  - {x: -0.004506886, y: 0.21266285}
+  - {x: 0.029534254, y: 0.21964112}
+  - {x: 0.12081094, y: 0.24639785}
+  - {x: 0.16708894, y: 0.2664578}
+  - {x: 0.19540583, y: 0.2902673}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1662864877
 GameObject:
   m_ObjectHideFlags: 0
@@ -4243,6 +4364,10 @@ PrefabInstance:
     - target: {fileID: 1239217008494401521, guid: 77f49f0826ac5b944a245b3542d00233, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329105571640230725, guid: 77f49f0826ac5b944a245b3542d00233, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1485781114217035000, guid: 77f49f0826ac5b944a245b3542d00233, type: 3}
       propertyPath: m_Name

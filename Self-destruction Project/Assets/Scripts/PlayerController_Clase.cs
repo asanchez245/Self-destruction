@@ -77,7 +77,7 @@ public class PlayerController_Clase : MonoBehaviour
     {
         if (collision.transform.CompareTag("Espejo") && Input.GetKey(KeyCode.E))
         {
-            //termina el juego
+            Debug.Log("termina el juego");
         }
     }
 }
