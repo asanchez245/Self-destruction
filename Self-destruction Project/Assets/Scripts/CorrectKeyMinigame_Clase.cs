@@ -42,11 +42,11 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
         PlatosMinigame();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (playerController.playerInput)
         {
-            if (collision.transform.tag == "Player")
+            if (collision.transform.tag == "Player" && Input.GetKey(KeyCode.E))
             {
                 switch (transform.tag)
                 {
