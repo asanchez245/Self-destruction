@@ -7,11 +7,14 @@ public class ItemController_Clase : MonoBehaviour
 {
     #region VARIABLES
     PlayerController_Clase playerController;
+    GameControler_Clase gameController;
 
     [SerializeField] GameObject _player;
+    [SerializeField] GameObject _gameController;
     [SerializeField] float _crono;
     [SerializeField] bool _depositado;
-
+    [SerializeField] int _maxInventory;
+    [SerializeField] bool inventoryFull;
     public bool _cogerItem;
     public bool _dejarItem;
 
@@ -21,14 +24,18 @@ public class ItemController_Clase : MonoBehaviour
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _gameController = GameObject.Find("GameController");
+
         playerController = _player.GetComponent<PlayerController_Clase>();
+        gameController = _gameController.GetComponent<GameControler_Clase>();
         _depositado = true;
 
         //_sfxController = GameObject.FindGameObjectWithTag("AudioController");
     }
     private void Update()
     {
-        _crono -= Time.deltaTime;       
+        _crono -= Time.deltaTime;
+                
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -62,7 +69,11 @@ public class ItemController_Clase : MonoBehaviour
             //Cuando el item aggarrado por el player esta en el trigger de la zona de deposito, este puede ser soltado
             if (collision.transform.tag == "Deposito")
             {
-                if (!_depositado/* && playerController.inventoryFull*/)
+                if (collision.transform.childCount == _maxInventory)
+                {
+                    inventoryFull = false;
+                }
+                if (!_depositado && !inventoryFull)
                 {
                     if(_crono <= 0)
                     {
@@ -77,6 +88,19 @@ public class ItemController_Clase : MonoBehaviour
                             //_sfxController.GetComponent<AudioController_Clase>().SonidoItems();
                             //_depositado = true;
                             //playerController.inventoryFull = false;
+                            if(collision.transform.childCount == _maxInventory)
+                            {
+                                if(_maxInventory == 3)
+                                {
+                                    gameController.doneMinigames[0] = true;
+
+                                }
+                                if(_maxInventory == 5)
+                                {
+                                    gameController.doneMinigames[3] = true;
+
+                                }
+                            }
                     
                         }
                     }

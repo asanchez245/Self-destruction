@@ -70,7 +70,7 @@ public class GameControler_Clase : MonoBehaviour
 
     private void CheckDoneMinigames()
     {
-        if (doneMinigames[0] && doneMinigames[1] && doneMinigames[2] /*&& doneMinigames[3] && doneMinigames[4]*/)
+        if (doneMinigames[0] && doneMinigames[1] && doneMinigames[2] && doneMinigames[3] && doneMinigames[4])
         {
             mantaEspejo.SetActive(false);
             espejo.GetComponent<Collider2D>().enabled = true;

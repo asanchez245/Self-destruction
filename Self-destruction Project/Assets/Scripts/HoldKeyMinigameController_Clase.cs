@@ -166,6 +166,7 @@ public class MinigamesController_Clase : MonoBehaviour
                 _sliderCamaObject.SetActive(false);
                 _camaHecha.gameObject.SetActive(true);
 
+                gameController.doneMinigames[1] = true;
             }
         }
     }
