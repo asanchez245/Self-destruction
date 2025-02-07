@@ -11,9 +11,6 @@ using UnityEngine.UI;
 public class GameControler_Clase : MonoBehaviour
 {
     #region VARIABLES
-    [SerializeField] Slider cerebroSlider;
-    [SerializeField] Slider pulmonesSlider;
-    [SerializeField] Slider higadoSlider;
 
     [SerializeField] GameObject playerController;
 
@@ -21,6 +18,9 @@ public class GameControler_Clase : MonoBehaviour
     [SerializeField] GameObject mantaEspejo;
     [SerializeField] GameObject espejo;
 
+    public Slider cerebroSlider;
+    public Slider pulmonesSlider;
+    public Slider higadoSlider;
     public float multiplicadorCerebro;
     public float multiplicadorHigado;
 

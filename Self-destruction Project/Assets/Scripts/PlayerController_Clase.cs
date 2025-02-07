@@ -50,6 +50,10 @@ public class PlayerController_Clase : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(movement.x * _speed, movement.y * _speed);
         }
+        else
+        {
+            rb.linearVelocity = Vector3.zero;
+        }
     }
 
     public void PlayerDeath()
@@ -78,6 +82,7 @@ public class PlayerController_Clase : MonoBehaviour
         if (collision.transform.CompareTag("Espejo") && Input.GetKey(KeyCode.E))
         {
             Debug.Log("termina el juego");
+            playerInput = false;
         }
     }
 }

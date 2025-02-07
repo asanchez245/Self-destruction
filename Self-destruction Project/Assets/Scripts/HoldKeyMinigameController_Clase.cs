@@ -63,6 +63,9 @@ public class MinigamesController_Clase : MonoBehaviour
                     _startCama = false;
                     letras[0].gameObject.SetActive(false);
                     letras[1].gameObject.SetActive(false);
+                    letras[2].gameObject.SetActive(false);
+                    letras[3].gameObject.SetActive(false);
+                    letras[4].gameObject.SetActive(false);
 
                     break;
 
@@ -75,7 +78,7 @@ public class MinigamesController_Clase : MonoBehaviour
     {
         if (_startCama && playerController.playerInput)
         {
-            if (_sliderCama.value <= 20)
+            if (_sliderCama.value <= 15)
             {
                 letras[0].gameObject.SetActive(true);
                 letras[1].gameObject.SetActive(true);
@@ -153,7 +156,7 @@ public class MinigamesController_Clase : MonoBehaviour
                 }
                 #endregion
             }
-            if (_sliderCama.value >= 40)
+            if (_sliderCama.value >= 30)
             {
                 letras[2].gameObject.SetActive(false);
                 letras[3].gameObject.SetActive(false);
