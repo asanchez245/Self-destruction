@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 773e01641b435f24cad6c370950b9349
+guid: 07080399f96825841a819f716f30a983
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7026243837481864959
-    second: SB_sprite_0
+      213: 7813880301174650472
+    second: SB_plastosSinHacer 1_0
+  - first:
+      213: -7195973689254238286
+    second: SB_plastosSinHacer 1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SB_sprite_0
+      name: SB_plastosSinHacer 1_0
       rect:
         serializedVersion: 2
-        x: 100
-        y: 341
-        width: 748
-        height: 549
+        x: 606
+        y: 783
+        width: 33
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ffe42662b8b328160800000000000000
-      internalID: 7026243837481864959
+      spriteID: 866ffe4fbba707c60800000000000000
+      internalID: 7813880301174650472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SB_plastosSinHacer 1_1
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 786
+        width: 47
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b7a1f63e04c22c90800000000000000
+      internalID: -7195973689254238286
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SB_sprite_0: 7026243837481864959
+      SB_plastosSinHacer 1_0: 7813880301174650472
+      SB_plastosSinHacer 1_1: -7195973689254238286
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

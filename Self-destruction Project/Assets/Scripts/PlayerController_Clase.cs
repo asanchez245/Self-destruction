@@ -83,6 +83,7 @@ public class PlayerController_Clase : MonoBehaviour
         {
             Debug.Log("termina el juego");
             playerInput = false;
+            _deathCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
         }
     }
 }

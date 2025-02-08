@@ -7,16 +7,18 @@ public class ItemController_Clase : MonoBehaviour
 {
     #region VARIABLES
     PlayerController_Clase playerController;
-    GameControler_Clase gameController;
+    GameControler_Clase gameControler_Clase;
 
-    [SerializeField] GameObject _player;
     [SerializeField] GameObject _gameController;
+    [SerializeField] GameObject _player;
+    [SerializeField] GameObject _deposito;
+
+    [SerializeField] int _maxInventory;
+
+
     [SerializeField] float _crono;
     [SerializeField] bool _depositado;
-    [SerializeField] int _maxInventory;
-    [SerializeField] bool inventoryFull;
-    public bool _cogerItem;
-    public bool _dejarItem;
+    bool _isDepositado = false;
 
     //public GameObject _sfxController;
 
@@ -26,8 +28,8 @@ public class ItemController_Clase : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _gameController = GameObject.Find("GameController");
 
+        gameControler_Clase = _gameController.GetComponent<GameControler_Clase>();
         playerController = _player.GetComponent<PlayerController_Clase>();
-        gameController = _gameController.GetComponent<GameControler_Clase>();
         _depositado = true;
 
         //_sfxController = GameObject.FindGameObjectWithTag("AudioController");
@@ -35,7 +37,11 @@ public class ItemController_Clase : MonoBehaviour
     private void Update()
     {
         _crono -= Time.deltaTime;
-                
+        if (_deposito.transform.childCount == _maxInventory)
+        {
+            gameControler_Clase.doneMinigames[0] = true;
+
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -45,67 +51,42 @@ public class ItemController_Clase : MonoBehaviour
             //Cuando el player esta en el trigger del objeto, este puede ser agarrado
             if (collision.transform.tag == "Player")
             {
-                if (_depositado/* && !playerController.inventoryFull*/)
-                {
-
                     if (_crono <= 0)
                     {
                         Debug.Log("Puedes agarrar el objeto");
-                        if (Input.GetKey(KeyCode.E))
+                        if (Input.GetKey(KeyCode.E) && !_isDepositado)
                         {
                             _crono = .2f;
                             transform.parent = collision.transform;
                             transform.position = collision.transform.position + new Vector3(1, -.5f, 0);
-                            _cogerItem = true;
-                            _dejarItem = false;
+
                             //_sfxController.GetComponent<AudioController_Clase>().SonidoItems();
-                            _depositado = false;
-                            //playerController.inventoryFull = true;
                     
                         }
                     }
-                }
             }
+        
             //Cuando el item aggarrado por el player esta en el trigger de la zona de deposito, este puede ser soltado
             if (collision.transform.tag == "Deposito")
             {
-                if (collision.transform.childCount == _maxInventory)
+
+                if(_crono <= 0)
                 {
-                    inventoryFull = false;
-                }
-                if (!_depositado && !inventoryFull)
-                {
-                    if(_crono <= 0)
+                    Debug.Log("Puedes dejar el objeto");
+                    if (Input.GetKey(KeyCode.E))
                     {
-                        Debug.Log("Puedes dejar el objeto");
-                        if (Input.GetKey(KeyCode.E))
-                        {
-                            _crono = .2f;
-                            transform.parent = collision.transform;
-                            transform.position = collision.transform.position;
-                            _cogerItem = false;
-                            _dejarItem = true;
-                            //_sfxController.GetComponent<AudioController_Clase>().SonidoItems();
-                            //_depositado = true;
-                            //playerController.inventoryFull = false;
-                            if(collision.transform.childCount == _maxInventory)
-                            {
-                                if(_maxInventory == 3)
-                                {
-                                    gameController.doneMinigames[0] = true;
+                        _crono = .2f;
+                        transform.parent = collision.transform;
+                        transform.position = collision.transform.position;
+                        _isDepositado = true;
 
-                                }
-                                if(_maxInventory == 5)
-                                {
-                                    gameController.doneMinigames[3] = true;
-
-                                }
-                            }
+                        //_sfxController.GetComponent<AudioController_Clase>().SonidoItems();
                     
-                        }
                     }
-                }           
+                }
+                          
             }
-        }       
-    }
+        }
+    }       
 }
+

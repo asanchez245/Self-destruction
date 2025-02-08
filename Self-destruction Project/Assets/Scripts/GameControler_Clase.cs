@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 using UnityEngine.UI;
+using Unity.Cinemachine;
+
 
 
 
@@ -14,9 +16,11 @@ public class GameControler_Clase : MonoBehaviour
 
     [SerializeField] GameObject playerController;
 
-    [SerializeField] GameObject papelera;
     [SerializeField] GameObject mantaEspejo;
     [SerializeField] GameObject espejo;
+
+    [SerializeField] GameObject _espejoCamera;
+
 
     public Slider cerebroSlider;
     public Slider pulmonesSlider;
@@ -59,22 +63,27 @@ public class GameControler_Clase : MonoBehaviour
             playerController.GetComponent<PlayerController_Clase>().PlayerDeath();
         }
 
-        //Comprobador papelera llena
-        if(papelera.transform.childCount == 3)
-        {
-            Debug.Log("papelera llena");
-        }
-
         CheckDoneMinigames();
     }
 
     private void CheckDoneMinigames()
     {
-        if (doneMinigames[0] && doneMinigames[1] && doneMinigames[2] && doneMinigames[3] && doneMinigames[4])
+        if (doneMinigames[0] && doneMinigames[1] && doneMinigames[2])
         {
-            mantaEspejo.SetActive(false);
-            espejo.GetComponent<Collider2D>().enabled = true;
+            StartCoroutine(UnlockEnding());
         }
+    }
+
+    public IEnumerator UnlockEnding()
+    {
+        _espejoCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+        yield return new WaitForSeconds(1.5f);
+        mantaEspejo.SetActive(false);
+        espejo.GetComponent<Collider2D>().enabled = true;
+        yield return new WaitForSeconds(1f);
+        _espejoCamera.GetComponent<CinemachineVirtualCamera>().Priority = -1;
+
+
     }
 
     public void CerebroBoost()
