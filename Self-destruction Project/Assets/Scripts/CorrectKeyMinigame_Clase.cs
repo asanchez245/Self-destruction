@@ -18,6 +18,7 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
     [SerializeField] GameObject _platosSinHacer;
     [SerializeField] GameObject _platosHechos;
 
+    [SerializeField] GameObject letraE;
     [SerializeField] GameObject[] letras;
     int _currentKey;
 
@@ -34,6 +35,7 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
         _platosHechos.SetActive(false);
 
         _currentKey = 0;
+        letraE.SetActive(false);
     }
 
 
@@ -46,11 +48,14 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
     {
         if (playerController.playerInput)
         {
-            if (collision.transform.tag == "Player" && Input.GetKey(KeyCode.E))
+            if (collision.transform.tag == "Player")
             {
+                letraE.SetActive(true);
+                if(Input.GetKey(KeyCode.E))
                 switch (transform.tag)
                 {
                     case ("Platos"):
+                        letraE.SetActive(false);
                         _sliderPlatosObject.SetActive(true);
                         _startPlatos = true;
                         playerController.playerInput = false;
@@ -64,6 +69,7 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
+            letraE.SetActive(false);
             switch (transform.tag)
             {
                 case ("Platos"):
@@ -166,6 +172,8 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
                         playerController.playerInput = true;
                         gameController.doneMinigames[2] = true;
                         GetComponent<Collider2D>().enabled = false;
+                        _platosSinHacer.SetActive(false);
+                        _platosHechos.SetActive(true);
                     }
                     if (Input.anyKeyDown)
                     {

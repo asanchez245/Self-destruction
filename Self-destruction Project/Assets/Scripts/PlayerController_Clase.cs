@@ -11,6 +11,7 @@ public class PlayerController_Clase : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
 
     public bool playerInput;
+    [SerializeField] GameObject letraE;
 
     [SerializeField] float _speed;
     [SerializeField] GameObject _deathCamera;
@@ -24,6 +25,7 @@ public class PlayerController_Clase : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         playerInput = true;
         gameControler_Clase = _gameController.GetComponent<GameControler_Clase>();
+        letraE.SetActive(false);
     }
 
 
@@ -79,12 +81,28 @@ public class PlayerController_Clase : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Espejo") && Input.GetKey(KeyCode.E))
+        if (collision.transform.CompareTag("Espejo"))
         {
-            Debug.Log("termina el juego");
-            playerInput = false;
-            _deathCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+            letraE.SetActive(true);
+            if (Input.GetKey(KeyCode.E))
+            {
+                letraE.SetActive(false);
+
+                Debug.Log("termina el juego");
+                playerInput = false;
+                _deathCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+
+            }
+
         }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Espejo"))
+        {
+            letraE.SetActive(false);
+        }
+
     }
 }
 
