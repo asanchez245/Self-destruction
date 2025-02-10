@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -7,21 +8,18 @@ using UnityEngine.UI;
 
 public class MainMenuController_Clase : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] Animator fadeAnimator;
 
-    // Update is called once per frame
-    void Update()
+
+    public IEnumerator Fade(int scene)
     {
-        
+        fadeAnimator.Play("FadeOut");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(scene);
     }
 
     public void LoadScene(int scene)
     {
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene(scene);
+        StartCoroutine(Fade(scene));
     }
 }
