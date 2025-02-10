@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      platosHEchos_0: -1923712864464314002
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -29,6 +29,7 @@ public class GameControler_Clase : MonoBehaviour
     public float multiplicadorHigado;
 
     public bool respirando;
+    public bool espejoEnabled;
 
     public bool[] doneMinigames;
 
@@ -38,7 +39,8 @@ public class GameControler_Clase : MonoBehaviour
     private void Start()
     {
         multiplicadorCerebro = 1;
-        multiplicadorHigado = 1;      
+        multiplicadorHigado = 1; 
+        espejoEnabled = false;
     }
 
     void Update()
@@ -71,6 +73,10 @@ public class GameControler_Clase : MonoBehaviour
         if (doneMinigames[0] && doneMinigames[1] && doneMinigames[2])
         {
             StartCoroutine(UnlockEnding());
+            if (!espejoEnabled)
+            {
+                espejo.GetComponent<Collider2D>().enabled = true;
+            }
         }
     }
 
@@ -79,13 +85,13 @@ public class GameControler_Clase : MonoBehaviour
         _espejoCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
         yield return new WaitForSeconds(1.5f);
         mantaEspejo.SetActive(false);
-        espejo.GetComponent<Collider2D>().enabled = true;
         yield return new WaitForSeconds(1f);
         _espejoCamera.GetComponent<CinemachineVirtualCamera>().Priority = -1;
 
 
     }
 
+   
     public void CerebroBoost()
     {
         cerebroSlider.value++;

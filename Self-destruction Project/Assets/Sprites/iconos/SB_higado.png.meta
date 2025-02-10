@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SB_higado_0: 1488154376200016851
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

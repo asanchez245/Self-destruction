@@ -12,6 +12,7 @@ public class PlayerController_Clase : MonoBehaviour
 
     public bool playerInput;
     [SerializeField] GameObject letraE;
+    [SerializeField] GameObject espejo;
 
     [SerializeField] float _speed;
     [SerializeField] GameObject _deathCamera;
@@ -86,6 +87,8 @@ public class PlayerController_Clase : MonoBehaviour
             letraE.SetActive(true);
             if (Input.GetKey(KeyCode.E))
             {
+                gameControler_Clase.espejoEnabled = true;
+                espejo.GetComponent<Collider2D>().enabled = false;
                 letraE.SetActive(false);
 
                 Debug.Log("termina el juego");
