@@ -2,6 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using System;
+using System.Collections;
+using UnityEngine.Audio;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using JetBrains.Annotations;
+
 
 public class PlayerController_Clase : MonoBehaviour
 {
@@ -11,13 +18,25 @@ public class PlayerController_Clase : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
 
     public bool playerInput;
-    [SerializeField] GameObject letraE;
-    [SerializeField] GameObject espejo;
+    [SerializeField] GameObject[] _letraE;
+    [SerializeField] GameObject _espejo;
+    [SerializeField] GameObject _mainMenuController;
+    [SerializeField] GameObject _gameController;
+    [SerializeField] GameObject _deathCamera;
+
+    [SerializeField] GameObject _panelWin;
+    [SerializeField] GameObject _panelDeath;
+    [SerializeField] GameObject _panelFade;
+
+    [SerializeField] float _cronoTutoText;
 
     [SerializeField] float _speed;
-    [SerializeField] GameObject _deathCamera;
-    [SerializeField] GameObject _gameController;
+    [SerializeField] Text[] tutoTexts;
     GameControler_Clase gameControler_Clase;
+    MainMenuController_Clase MainMenuController_Clase;
+
+    [SerializeField] Animator panelAnimatorWin;
+    [SerializeField] Animator panelAnimatorDeath;
 
 
     #endregion
@@ -26,12 +45,15 @@ public class PlayerController_Clase : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         playerInput = true;
         gameControler_Clase = _gameController.GetComponent<GameControler_Clase>();
-        letraE.SetActive(false);
+        MainMenuController_Clase = _mainMenuController.GetComponent<MainMenuController_Clase>();
+        _letraE[0].SetActive(false);
+        _letraE[1].SetActive(false);
     }
 
 
     void Update()
     {
+        _cronoTutoText -= Time.deltaTime;
         rb.sleepMode = RigidbodySleepMode2D.NeverSleep; //Hace que el rigidbody este siempre activo 
 
         //Movimiento del Player
@@ -61,11 +83,13 @@ public class PlayerController_Clase : MonoBehaviour
 
     public void PlayerDeath()
     {
+        gameControler_Clase.playerDies = true;
         playerInput = false;
         rb.linearVelocity = Vector3.zero;
-
-        Debug.Log("Muelto");
         _deathCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+        _panelFade.SetActive(true);
+        MainMenuController_Clase.fadeAnimator.Play("FadeOut");
+        StartCoroutine(PlayerDeathPanel());
     }
     private void InventoryCheck()
     {
@@ -84,17 +108,40 @@ public class PlayerController_Clase : MonoBehaviour
     {
         if (collision.transform.CompareTag("Espejo"))
         {
-            letraE.SetActive(true);
+            _letraE[0].SetActive(true);
             if (Input.GetKey(KeyCode.E))
             {
                 gameControler_Clase.espejoEnabled = true;
-                espejo.GetComponent<Collider2D>().enabled = false;
-                letraE.SetActive(false);
+                _espejo.GetComponent<Collider2D>().enabled = false;
+                _letraE[0].SetActive(false);
 
                 Debug.Log("termina el juego");
                 playerInput = false;
                 _deathCamera.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+                _panelFade.SetActive(true);
+                MainMenuController_Clase.fadeAnimator.Play("FadeOut");
+                StartCoroutine(PlayerWinPanel());
+            }
 
+        }
+        if (collision.transform.CompareTag("Pc"))
+        {
+            _letraE[1].SetActive(true);
+            if (Input.GetKey(KeyCode.E) && _cronoTutoText <= 0)
+            {
+                for(int i = 0; i < tutoTexts.Length; i++)
+                {
+                    if(tutoTexts[i].enabled == true)
+                    {
+                        tutoTexts[i].enabled = false;
+                    }
+                    else
+                    {
+                        tutoTexts[i].enabled = true;
+                    }
+                    _cronoTutoText = .2f;
+                }
+                
             }
 
         }
@@ -103,9 +150,37 @@ public class PlayerController_Clase : MonoBehaviour
     {
         if (collision.transform.CompareTag("Espejo"))
         {
-            letraE.SetActive(false);
+            _letraE[0].SetActive(false);
+        }
+        if (collision.transform.CompareTag("Pc"))
+        {
+            _letraE[1].SetActive(false);
         }
 
+        
+    }
+    public IEnumerator PlayerWinPanel()
+    {
+        yield return new WaitForSeconds(2.5f);
+        _panelWin.SetActive(true);
+        panelAnimatorWin.Play("Panel_In");
+        yield return new WaitForSeconds(2.5f);
+        panelAnimatorWin.Play("Panel_Out");
+        yield return new WaitForSeconds(2f);
+        _panelWin.SetActive(false);
+        MainMenuController_Clase.LoadScene(0);
+    }
+    public IEnumerator PlayerDeathPanel()
+    {
+        yield return new WaitForSeconds(2.5f);
+        _panelDeath.SetActive(true);
+        panelAnimatorDeath.Play("Panel_In2");
+        yield return new WaitForSeconds(2.5f);
+        Debug.Log("panelOut");
+        panelAnimatorDeath.Play("Panel_Out2");
+        yield return new WaitForSeconds(2f);
+        _panelDeath.SetActive(false);
+        MainMenuController_Clase.LoadScene(0);
     }
 }
 

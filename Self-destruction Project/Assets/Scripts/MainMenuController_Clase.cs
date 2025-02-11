@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class MainMenuController_Clase : MonoBehaviour
 {
-    [SerializeField] Animator fadeAnimator;
+    public Animator fadeAnimator;
 
 
     public IEnumerator Fade(int scene)

@@ -21,6 +21,7 @@ public class GameControler_Clase : MonoBehaviour
 
     [SerializeField] GameObject _espejoCamera;
 
+    [SerializeField] GameObject _panelPausa;
 
     public Slider cerebroSlider;
     public Slider pulmonesSlider;
@@ -33,6 +34,8 @@ public class GameControler_Clase : MonoBehaviour
 
     public bool[] doneMinigames;
 
+    public bool playerDies;
+
 
 
     #endregion
@@ -41,11 +44,16 @@ public class GameControler_Clase : MonoBehaviour
         multiplicadorCerebro = 1;
         multiplicadorHigado = 1; 
         espejoEnabled = false;
+        _panelPausa.SetActive(false);
     }
 
     void Update()
     {
-
+        //Pause/Unpause game
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {            
+            PauseGame();          
+        }
         cerebroSlider.value -= Time.deltaTime * multiplicadorCerebro;
         higadoSlider.value -= Time.deltaTime * 5 * multiplicadorHigado;
 
@@ -62,7 +70,10 @@ public class GameControler_Clase : MonoBehaviour
         //Player Lose
         if(cerebroSlider.value <=0 || pulmonesSlider.value <= 0 ||  higadoSlider.value <= 0)
         {
-            playerController.GetComponent<PlayerController_Clase>().PlayerDeath();
+            if (!playerDies)
+            {
+                playerController.GetComponent<PlayerController_Clase>().PlayerDeath();
+            }
         }
 
         CheckDoneMinigames();
@@ -117,5 +128,18 @@ public class GameControler_Clase : MonoBehaviour
         }
     }
 
+    public void PauseGame()
+    {
+        if(Time.timeScale >= 1)
+        {
+            Time.timeScale = 0;
+            _panelPausa.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            _panelPausa.SetActive(false);
+        }
+    }
     
 }
