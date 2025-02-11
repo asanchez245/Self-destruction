@@ -20,7 +20,9 @@ public class ItemController_Clase : MonoBehaviour
     [SerializeField] bool _depositado;
     bool _isDepositado = false;
 
-    //public GameObject _sfxController;
+
+    [SerializeField] AudioSource _itemAudio;
+
 
     #endregion
     private void Start()
@@ -32,7 +34,8 @@ public class ItemController_Clase : MonoBehaviour
         playerController = _player.GetComponent<PlayerController_Clase>();
         _depositado = true;
 
-        //_sfxController = GameObject.FindGameObjectWithTag("AudioController");
+
+        _itemAudio = playerController.GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -60,7 +63,7 @@ public class ItemController_Clase : MonoBehaviour
                             transform.parent = collision.transform;
                             transform.position = collision.transform.position + new Vector3(1, -.5f, 0);
 
-                            //_sfxController.GetComponent<AudioController_Clase>().SonidoItems();
+                            _itemAudio.Play();
                     
                         }
                     }
@@ -80,8 +83,8 @@ public class ItemController_Clase : MonoBehaviour
                         transform.position = collision.transform.position;
                         _isDepositado = true;
 
-                        //_sfxController.GetComponent<AudioController_Clase>().SonidoItems();
-                    
+                        _itemAudio.Play();
+
                     }
                 }
                           

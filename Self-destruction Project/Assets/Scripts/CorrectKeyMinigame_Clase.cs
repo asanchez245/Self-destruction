@@ -20,6 +20,9 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
 
     [SerializeField] GameObject letraE;
     [SerializeField] GameObject[] letras;
+
+    [SerializeField] AudioSource _doingMinigame;
+
     int _currentKey;
 
     Vector3 letrasScale = new Vector3(.75f, .75f, .75f);
@@ -28,12 +31,13 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
 
     void Start()
     {
+        _doingMinigame = GetComponent<AudioSource>();
         _player = GameObject.FindGameObjectWithTag("Player");
         playerController = _player.GetComponent<PlayerController_Clase>();
         gameController = _gameController.GetComponent<GameControler_Clase>();
         _sliderPlatosObject.SetActive(false);
         _platosHechos.SetActive(false);
-
+        
         _currentKey = 0;
         letraE.SetActive(false);
     }
@@ -55,6 +59,7 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
                 switch (transform.tag)
                 {
                     case ("Platos"):
+                        _doingMinigame.Play();
                         letraE.SetActive(false);
                         _sliderPlatosObject.SetActive(true);
                         _startPlatos = true;
@@ -91,7 +96,7 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
     public void PlatosMinigame()
     {
         if (_startPlatos)
-        { 
+        {
             switch (_currentKey)
             {
                 case 0:
@@ -174,6 +179,7 @@ public class CorrectKeyMinigame_Clase : MonoBehaviour
                         GetComponent<Collider2D>().enabled = false;
                         _platosSinHacer.SetActive(false);
                         _platosHechos.SetActive(true);
+                        _doingMinigame.Stop();
                     }
                     if (Input.anyKeyDown)
                     {

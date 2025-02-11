@@ -17,7 +17,12 @@ public class MinigamesController_Clase : MonoBehaviour
     [SerializeField] bool _startCama;
     [SerializeField] GameObject _camaSinHacer;
     [SerializeField] GameObject _camaHecha;
+
+    [SerializeField] GameObject letraE;
     [SerializeField] GameObject[] letras;
+
+    [SerializeField] AudioSource _doingMinigame;
+
 
     Vector3 letrasScale = new Vector3(.75f, .75f, .75f);
     #endregion
@@ -35,19 +40,21 @@ public class MinigamesController_Clase : MonoBehaviour
         CamaMinigame();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (playerController.playerInput)
         {
             if (collision.transform.tag == "Player")
             {
-                switch (transform.tag)
+                letraE.SetActive(true);
+                if (Input.GetKey(KeyCode.E) && !_startCama)
                 {
-                    case ("HacerCama"):
-                        _sliderCamaObject.SetActive(true);
-                        _startCama = true;
+                    playerController.playerInput = false;
+                    _sliderCamaObject.SetActive(true);
+                    letraE.SetActive(false);
+                    _startCama = true;
+                    _doingMinigame.Play();
 
-                        break;
                 }
             }
         }
@@ -66,6 +73,9 @@ public class MinigamesController_Clase : MonoBehaviour
                     letras[2].gameObject.SetActive(false);
                     letras[3].gameObject.SetActive(false);
                     letras[4].gameObject.SetActive(false);
+                    playerController.playerInput = true;
+                    _doingMinigame.Stop();
+                    letraE.SetActive(false);
 
                     break;
 
@@ -76,7 +86,7 @@ public class MinigamesController_Clase : MonoBehaviour
 
     public void CamaMinigame()
     {
-        if (_startCama && playerController.playerInput)
+        if (_startCama)
         {
             if (_sliderCama.value <= 15)
             {
@@ -167,6 +177,8 @@ public class MinigamesController_Clase : MonoBehaviour
                 _camaHecha.gameObject.SetActive(true);
 
                 gameController.doneMinigames[1] = true;
+                GetComponent<Collider2D>().enabled = false;
+                _doingMinigame.Stop();
             }
         }
     }

@@ -10,7 +10,6 @@ public class MainMenuController_Clase : MonoBehaviour
 {
     public Animator fadeAnimator;
 
-
     public IEnumerator Fade(int scene)
     {
         fadeAnimator.Play("FadeOut");
@@ -20,6 +19,7 @@ public class MainMenuController_Clase : MonoBehaviour
 
     public void LoadScene(int scene)
     {
+
         StartCoroutine(Fade(scene));
     }
 }
